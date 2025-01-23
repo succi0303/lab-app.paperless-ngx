@@ -40,8 +40,8 @@ services:
 volumes:
   onedrive:
     driver: rclone
-    driver_opts: "onedrive:paperless"
-      remote: "paperless"
+    driver_opts:
+      remote: "onedrive:paperless"
       allow_other: "true"
       vfs_cache_mode: "full"
       poll_interval: 0
