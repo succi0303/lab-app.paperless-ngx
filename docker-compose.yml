@@ -26,6 +26,7 @@ services:
     ports:
       - "8010:8000"
     volumes:
+      - onedrive:/var/src/paperless/media/documents
       - data:/usr/src/paperless/data
       - media:/usr/src/paperless/media
       - ./export:/usr/src/paperless/export
@@ -37,6 +38,13 @@ services:
       - stack.env
 
 volumes:
+  onedrive:
+    driver: rclone
+    driver_opts: "onedrive:paperless"
+      remote: "paperless"
+      allow_other: "true"
+      vfs_cache_mode: "full"
+      poll_interval: 0
   data:
   media:
   pgdata:
