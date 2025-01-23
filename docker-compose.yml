@@ -26,10 +26,10 @@ services:
     ports:
       - "8010:8000"
     volumes:
-      - onedrive/data:/usr/src/paperless/data
-      - onedrive/media:/usr/src/paperless/media
-      - onedrive/export:/usr/src/paperless/export
-      - onedrive/consume:/usr/src/paperless/consume
+      - data:/usr/src/paperless/data
+      - media:/usr/src/paperless/media
+      - export:/usr/src/paperless/export
+      - consume:/usr/src/paperless/consume
     environment:
       PAPERLESS_REDIS: redis://broker:6379
       PAPERLESS_DBHOST: db
@@ -37,14 +37,33 @@ services:
       - stack.env
 
 volumes:
-  onedrive:
+  data:
     driver: rclone
     driver_opts:
-      remote: "onedrive:paperless"
+      remote: "onedrive:paperless/data"
       allow_other: "true"
       vfs_cache_mode: "full"
       poll_interval: 0
-  data:
   media:
+    driver: rclone
+    driver_opts:
+      remote: "onedrive:paperless/media"
+      allow_other: "true"
+      vfs_cache_mode: "full"
+      poll_interval: 0
+  export:
+    driver: rclone
+    driver_opts:
+      remote: "onedrive:paperless/export"
+      allow_other: "true"
+      vfs_cache_mode: "full"
+      poll_interval: 0
+  consume:
+    driver: rclone
+    driver_opts:
+      remote: "onedrive:paperless/consume"
+      allow_other: "true"
+      vfs_cache_mode: "full"
+      poll_interval: 0
   pgdata:
   redisdata:
