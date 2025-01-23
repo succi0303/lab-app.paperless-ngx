@@ -38,12 +38,6 @@ services:
 
 volumes:
   data:
-    driver: rclone
-    driver_opts:
-      remote: "onedrive:paperless/data"
-      allow_other: "true"
-      vfs_cache_mode: "full"
-      poll_interval: 0
   media:
     driver: rclone
     driver_opts:
