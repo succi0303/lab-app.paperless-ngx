@@ -55,7 +55,7 @@ volumes:
   consume:
     driver: rclone
     driver_opts:
-      remote: "onedrive:ScanSnap/paperless-ngx"
+      remote: "onedrive:paperless/consume"
       allow_other: "true"
       vfs_cache_mode: "full"
       poll_interval: 0
