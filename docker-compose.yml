@@ -6,6 +6,18 @@ services:
     restart: unless-stopped
     volumes:
       - redisdata:/data
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 512M
+        reservations:
+          cpus: '0.1'
+          memory: 256M
+    mem_limit: 512G
+    memswap_limit: 512M
+    mem_swappiness: 0
+    command:  redis-server --maxmemory 512mb --maxmemorypolicy allkeys-1ru
 
   db:
     image: docker.io/library/postgres:16
@@ -16,6 +28,20 @@ services:
       POSTGRES_DB: paperless
       POSTGRES_USER: paperless
       POSTGRES_PASSWORD: paperless
+    deploy:
+      resources:
+        limits:
+          cpus: '1'
+          memory: 3G
+        reservations:
+          cpus: '0.5'
+          memory: 2G
+    mem_limit: 3G
+    mem_swappiness: 0
+    command:
+      - "postgres"
+      - "-c"
+      - "max_connections=100"
 
   webserver:
     image: ghcr.io/paperless-ngx/paperless-ngx:latest
@@ -35,6 +61,17 @@ services:
       PAPERLESS_DBHOST: db
     env_file:
       - stack.env
+    deploy:
+      resources:
+        limits:
+          cpus: '2'
+          memory: 6G
+        reservations:
+          cpus: '1'
+          memory: 4G
+    mem_limit: 6G
+    memswap_limit: 7G
+    mem_swappiness: 0
 
 volumes:
   data:
