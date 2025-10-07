@@ -77,5 +77,6 @@ volumes:
   data:
   media:
   consume:
+  export:
   pgdata:
   redisdata:
