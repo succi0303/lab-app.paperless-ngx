@@ -76,25 +76,6 @@ services:
 volumes:
   data:
   media:
-    driver: rclone
-    driver_opts:
-      remote: "onedrive:paperless/media"
-      allow_other: "true"
-      vfs_cache_mode: "full"
-      poll_interval: 0
-  export:
-    driver: rclone
-    driver_opts:
-      remote: "onedrive:paperless/export"
-      allow_other: "true"
-      vfs_cache_mode: "full"
-      poll_interval: 0
   consume:
-    driver: rclone
-    driver_opts:
-      remote: "onedrive:paperless/consume"
-      allow_other: "true"
-      vfs_cache_mode: "full"
-      poll_interval: 0
   pgdata:
   redisdata:
